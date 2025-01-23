@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,13 +13,27 @@ public class Client {
 
     private String email;
     private String password;
+    private String name;
 
-    @OneToMany(mappedBy = "client")
-    private List<EmotionJournalEntry> journalEntries;
+    @ElementCollection
+    private List<String> notifications = new ArrayList<>(); // List of notifications
 
-    @ManyToMany
-    private List<Therapist> therapists;
+    @ElementCollection
+    private List<String> journalEntries = new ArrayList<>(); // List of journal entries
 
+    @ElementCollection
+    private List<String> therapistMappings = new ArrayList<>(); // Mapped therapists
+
+    @ElementCollection
+    private List<String> appointmentHistory = new ArrayList<>(); // Appointment history
+
+    @ElementCollection
+    private List<String> favorites = new ArrayList<>(); // Favorite therapists
+
+    @ElementCollection
+    private List<String> reviews = new ArrayList<>(); // Reviews for therapists
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -43,19 +58,59 @@ public class Client {
         this.password = password;
     }
 
-    public List<EmotionJournalEntry> getJournalEntries() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<String> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<String> notifications) {
+        this.notifications = notifications;
+    }
+
+    public List<String> getJournalEntries() {
         return journalEntries;
     }
 
-    public void setJournalEntries(List<EmotionJournalEntry> journalEntries) {
+    public void setJournalEntries(List<String> journalEntries) {
         this.journalEntries = journalEntries;
     }
 
-    public List<Therapist> getTherapists() {
-        return therapists;
+    public List<String> getTherapistMappings() {
+        return therapistMappings;
     }
 
-    public void setTherapists(List<Therapist> therapists) {
-        this.therapists = therapists;
+    public void setTherapistMappings(List<String> therapistMappings) {
+        this.therapistMappings = therapistMappings;
+    }
+
+    public List<String> getAppointmentHistory() {
+        return appointmentHistory;
+    }
+
+    public void setAppointmentHistory(List<String> appointmentHistory) {
+        this.appointmentHistory = appointmentHistory;
+    }
+
+    public List<String> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<String> favorites) {
+        this.favorites = favorites;
+    }
+
+    public List<String> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<String> reviews) {
+        this.reviews = reviews;
     }
 }
